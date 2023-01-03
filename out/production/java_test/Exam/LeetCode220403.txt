@@ -1,0 +1,92 @@
+    public int convertTime(String current, String correct) {
+        String[] s1 = current.split(":");
+        String[] s2 = current.split(":");
+        int i1 = Integer.valueOf(s1[0]);
+        int i2 = Integer.valueOf(s1[1]);
+        int j1 = Integer.valueOf(s2[0]);
+        int j2 = Integer.valueOf(s2[1]);
+        int result = 0;
+        int i = i1*60 + i2;
+        int j = j1*60 + j2;
+        System.out.println(i);
+        System.out.println(j);
+        if (i > j) {
+            j += 24 * 60;
+        }
+        while (i < j) {
+            if (j - i < 5) {
+                i += 1;
+                ++result;
+            }
+            else if (j - i < 15) {
+                i += 5;
+                ++result;
+            }
+            else if (j - i < 60) {
+                i += 15;
+                ++result;
+            }
+            else {
+                i += 60;
+                ++result;
+            }
+        }
+        return result;
+    }
+    public List<List<Integer>> findWinners(int[][] matches) {
+        int n = matches.length;
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+//        Set<Integer> set = new HashSet<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; ++i) {
+            if (map.get(matches[i][0]) == null) {
+                map.put(matches[i][0], 0);
+            }
+            if (map.get(matches[i][1]) != null) {
+                map.put(matches[i][1], map.get(matches[i][1])+1);
+            }
+            else {
+                map.put(matches[i][1], 1);
+            }
+        }
+        for (Map.Entry<Integer, Integer> pair  : map.entrySet()) {
+            int key = pair.getKey();
+            int value = pair.getValue();
+            if (value == 0) {
+                l1.add(key);
+            }
+            else if (value == 1) {
+                l2.add(key);
+            }
+        }
+        l1.sort((a, b)->a-b);    // 可以用Collections.sort
+        l2.sort((a, b)->a-b);
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(l1); result.add(l2);
+        return result;
+    }
+    public int maximumCandies(int[] candies, long k) {
+        int n = candies.length;
+        long sum = 0;
+        for (int i = 0; i < n; ++i) {
+            sum += candies[i];
+        }
+        int left = 1;
+        int right = (int) (sum/k);
+        int temp = 0;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            for (int i = 0; i < n; ++i) {
+                temp += candies[i] / mid;
+            }
+            if (temp >= k) {
+                left = mid;
+            }
+            else {
+                right = mid - 1;
+            }
+            temp = 0;
+        }
+        return right;
+    }
