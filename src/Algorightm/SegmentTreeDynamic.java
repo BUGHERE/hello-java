@@ -101,20 +101,6 @@ class SegmentTreeDynamicPoint {
         int val, lazy;
     }
     Node root = new Node();
-    int query(Node cur, int l, int r, int tl, int tr) {
-        if (tl <= l && r <= tr) {
-            return cur.val;
-        }
-        else {
-            lazyCreate(cur);
-            pushDown(cur, r-l+1);
-            int m = l + (r-l)/2, ans = 0;
-            if (tl <= m) ans += query(cur.l, l, m, tl, tr);
-            if (m+1 <= tr) ans += query(cur.r, m+1, r, tl, tr);
-            pushUp(cur);
-            return ans;
-        }
-    }
     void lazyCreate(Node cur) {
         if (cur.l == null) cur.l = new Node();
         if (cur.r == null) cur.r = new Node();
@@ -148,6 +134,20 @@ class SegmentTreeDynamicPoint {
             if (tl <= m) upd(cur.l, l, m, tl, tr, val);
             if (m+1 <= tr) upd(cur.r, m+1, r, tl, tr, val);
             pushUp(cur);
+        }
+    }
+    int query(Node cur, int l, int r, int tl, int tr) {
+        if (tl <= l && r <= tr) {
+            return cur.val;
+        }
+        else {
+            lazyCreate(cur);
+            pushDown(cur, r-l+1);
+            int m = l + (r-l)/2, ans = 0;
+            if (tl <= m) ans += query(cur.l, l, m, tl, tr);
+            if (m+1 <= tr) ans += query(cur.r, m+1, r, tl, tr);
+            pushUp(cur);
+            return ans;
         }
     }
     int L = 1, R = (int)1e9;

@@ -19,6 +19,11 @@ public class MapTest {
         LinkedHashMap<Integer, Integer> lhm = new LinkedHashMap<>(2);
         lhm.put(1, 1);lhm.put(2, 2);lhm.put(3, 3);
         Iterator<Integer> iterator = lhm.keySet().iterator();
+        Set<Map.Entry<String, String>> entries = map.entrySet();
+        for (Map.Entry<String, String> entry : entries) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }

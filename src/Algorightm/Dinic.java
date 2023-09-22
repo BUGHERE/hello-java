@@ -1,8 +1,7 @@
-
+package Algorightm;
 
 import java.util.*;
-
-class Dinic {
+public class Dinic {
     // n->E, m->V, s->start, t->end, cur->弧优化, [heads, nexts, tos, weights]->链式向前星
     int n, m, s, t, lv[], cur[], heads[], nexts[], tos[], weights[];
 
@@ -44,7 +43,6 @@ class Dinic {
                 int to = tos[eg], vol = weights[eg];
                 if (vol > 0 && lv[to] == -1) {
                     lv[to] = lv[p] + 1;
-//                    System.out.println("to: " + to + " lv: " + lv[to]);
                     q.offer(to);
                 }
             }
@@ -54,9 +52,8 @@ class Dinic {
     public int dfs(int p, int flow) {
         if (p == t) return flow;
         int rmn = flow;  // 剩余的流量
-//        System.out.println("rmn = " + rmn);
         for (int eg = heads[p]; eg != 0 && rmn != 0; eg = nexts[eg]) {
-//            cur[p] = eg;  // 弧优化，这次dfs不再选择已经走过的边
+//            cur[p] = eg;  // 弧优化，这次dfs不再选择已经走过的边（不一定优化，可能更慢）
             int to = tos[eg], vol = weights[eg];
             if (vol > 0 && lv[to] == lv[p] + 1) {  // 往层数高的方向增广
                 int c = dfs(to, Math.min(vol, rmn));  // 尽可能多地传递流量
@@ -74,20 +71,4 @@ class Dinic {
         }
         return res;
     }
-}
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextInt()) {
-            int n = sc.nextInt(), m = sc.nextInt(), s = sc.nextInt(), t = sc.nextInt(), edges[][] = new int[m][3];
-            for (int i = 0; i < m; i++) {
-                edges[i][0] = sc.nextInt();
-                edges[i][1] = sc.nextInt();
-                edges[i][2] = sc.nextInt();
-            }
-            Dinic d = new Dinic(n, s, t, edges);
-            System.out.println(d.dinic());
-        }
-    }
-
 }

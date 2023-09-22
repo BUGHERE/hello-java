@@ -11,6 +11,7 @@ public class RegexTest {
         System.out.println(m.matches());
         System.out.println(m.group(0));
         System.out.println(m.group(1));
+
         System.out.println(s.matches(".*"));
     }
 }
