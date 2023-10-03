@@ -1,8 +1,8 @@
-
+package Algorightm;
 
 import java.util.*;
 
-class EK {
+public class EK {
     private static final int INF = Integer.MAX_VALUE;
     // 因为没有dfs自动记录，所以需要last存储上一个节点（存储路径），flow记录当前节点的最大流量
     int last[], flow[];
@@ -69,20 +69,5 @@ class EK {
             }
         }
         return res;
-    }
-}
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextInt()) {
-            int n = sc.nextInt(), m = sc.nextInt(), s = sc.nextInt(), t = sc.nextInt(), edges[][] = new int[m][3];
-            for (int i = 0; i < m; i++) {
-                edges[i][0] = sc.nextInt();
-                edges[i][1] = sc.nextInt();
-                edges[i][2] = sc.nextInt();
-            }
-            EK d = new EK(n, s, t, edges);
-            System.out.println(d.ek());
-        }
     }
 }

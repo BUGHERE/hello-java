@@ -1,5 +1,6 @@
 package Uses;
 
+import javax.xml.soap.Node;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -81,10 +82,7 @@ public class CommonTest {
         int[] ints = l.stream().mapToInt(i -> i).toArray();
 
         TreeMap<Integer, Integer> treeMap = new TreeMap<>();
-//        treeMap.merge()
-
-        new ArrayList<>(list);
-
+        
 
     }
 }

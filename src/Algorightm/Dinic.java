@@ -7,11 +7,11 @@ public class Dinic {
 
     public Dinic(int n, int s, int t, int edges[][]) {
         this.n = n; this.s = s; this.t = t;
+        m = edges.length;
+        int edgeNum = 1;  // range: [2, 2*m+1]
         lv = new int[n+1];  // [1, n] 或 [0, n-1]
         heads = new int[n+1];
         cur = new int[n+1];
-        m = edges.length;
-        int edgeNum = 1;  // range: [2, 2*m+1]
         tos = new int[2*m + 2];
         nexts = new int[2*m + 2];
         weights = new int[2*m + 2];
